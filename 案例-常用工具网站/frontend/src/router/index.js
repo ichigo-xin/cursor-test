@@ -6,6 +6,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/file-convert',
+    name: 'FileConvert',
+    component: () => import('../views/FileConvert/FileConvert.vue')
   }
 ]
 

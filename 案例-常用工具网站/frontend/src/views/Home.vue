@@ -15,7 +15,7 @@
     <section class="features">
       <h2>我们的服务</h2>
       <div class="feature-list">
-        <div class="feature-card" v-for="item in features" :key="item.title">
+        <div class="feature-card" v-for="item in features" :key="item.title" @click="handleFeatureClick(item)">
           <component :is="item.icon" class="feature-icon" />
           <h3>{{ item.title }}</h3>
           <p>{{ item.desc }}</p>
@@ -32,15 +32,21 @@
 
 <script setup>
 import { Document, Picture, Crop, Switch, Watermelon } from '@element-plus/icons-vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const activeMenu = '1'
 const features = [
-  { title: '文件转换', desc: '快速转换各种文件格式', icon: Document },
-  { title: '图片压缩', desc: '无损压缩图片', icon: Picture },
-  { title: '图片裁剪', desc: '自由裁剪图片尺寸', icon: Crop },
-  { title: '图片格式转换', desc: '支持多种图片格式转换', icon: Switch },
-  { title: '图片水印', desc: '添加自定义水印', icon: Watermelon }
+  { title: '文件转换', desc: '快速转换各种文件格式', icon: Document, path: '/file-convert' },
+  { title: '图片压缩', desc: '无损压缩图片', icon: Picture, path: '/image-compress' },
+  { title: '图片裁剪', desc: '自由裁剪图片尺寸', icon: Crop, path: '/image-crop' },
+  { title: '图片格式转换', desc: '支持多种图片格式转换', icon: Switch, path: '/image-convert' },
+  { title: '图片水印', desc: '添加自定义水印', icon: Watermelon, path: '/image-watermark' }
 ]
+
+const handleFeatureClick = (feature) => {
+  router.push(feature.path)
+}
 </script>
 
 <style lang="scss" scoped>
